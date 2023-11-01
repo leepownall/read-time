@@ -65,10 +65,7 @@
         "laravel": {
             "providers": [
                 "Pownall\\ReadTime\\ReadTimeServiceProvider"
-            ],
-            "aliases": {
-                "ReadTime": "Pownall\\ReadTime\\Facades\\ReadTime"
-            }
+            ]
         }
     },
     "minimum-stability": "dev",

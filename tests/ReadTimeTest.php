@@ -2,8 +2,8 @@
 
 use Pownall\ReadTime\ReadTime;
 
-it('can get read time', function (int $wordCount, int $minutes, int $hours) {
-    $readTime = new ReadTime($wordCount);
+it('can set properties on class', function (int $wordCount, int $minutes, int $hours) {
+    $readTime = new ReadTime(fake()->words($wordCount, asText: true));
 
     expect($readTime->wordCount())->toBe($wordCount);
     expect($readTime->minutes())->toBe($minutes);
@@ -17,8 +17,8 @@ it('can get read time', function (int $wordCount, int $minutes, int $hours) {
         [24800, 4, 2],
     ]);
 
-it('can get read time as human readable', function (int $wordCount, string $expected) {
-    $readTime = new ReadTime($wordCount);
+test('calling as string gives readable format', function (int $wordCount, string $expected) {
+    $readTime = new ReadTime(fake()->words($wordCount, asText: true));
 
     expect((string) $readTime)->toBe($expected);
 })
@@ -30,10 +30,39 @@ it('can get read time as human readable', function (int $wordCount, string $expe
         [24800, '2 hours 4 minutes'],
     ]);
 
-it('can get read time via static make as human readable', function (int $wordCount, string $expected) {
-    $readTime = ReadTime::make($wordCount);
+test('calling get gives readable format', function (int $wordCount, string $expected) {
+    $readTime = new ReadTime(fake()->words($wordCount, asText: true));
 
-    expect((string) $readTime)->toBe($expected);
+    expect($readTime->get())->toBe($expected);
+})
+    ->with([
+        [500, '3 minutes'],
+        [3000, '15 minutes'],
+        [18000, '1 hour 30 minutes'],
+        [24000, '2 hours'],
+        [24800, '2 hours 4 minutes'],
+    ]);
+
+it('can set words per minute', function (int $wordCount, int $minutes, int $hours) {
+    $readTime = new ReadTime(fake()->words($wordCount, asText: true), 500);
+
+    expect($readTime->wordsPerMinute())->toBe(500);
+    expect($readTime->minutes())->toBe($minutes);
+    expect($readTime->hours())->toBe($hours);
+})
+    ->with([
+        [500, 1, 0],
+        [3000, 6, 0],
+        [18000, 36, 0],
+        [24000, 48, 0],
+        [24800, 50, 0],
+        [30000, 0, 1],
+    ]);
+
+test('calling get gives readable format through blade', function (int $wordCount, string $expected) {
+    $content = fake()->words($wordCount, asText: true);
+
+    expect(blade("@readtime({$content})"))->toBe($expected);
 })
     ->with([
         [500, '3 minutes'],

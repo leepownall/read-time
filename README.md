@@ -1,18 +1,10 @@
-# This is my package read-time
+# Read Time
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/leepownall/read-time.svg?style=flat-square)](https://packagist.org/packages/leepownall/read-time)
 [![Tests](https://img.shields.io/github/actions/workflow/status/leepownall/read-time/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/leepownall/read-time/actions/workflows/run-tests.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/leepownall/read-time.svg?style=flat-square)](https://packagist.org/packages/leepownall/read-time)
 
-This is where your description should go. Try and limit it to a paragraph or two. Consider adding a small example.
-
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/read-time.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/read-time)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+Simple package for displaying read time.
 
 ## Installation
 
@@ -24,9 +16,46 @@ composer require leepownall/read-time
 
 ## Usage
 
+### Using `get()`
+
 ```php
-$skeleton = new Pownall\ReadTime();
-echo $skeleton->echoPhrase('Hello, pownall!');
+$readTime = new Pownall\ReadTime\ReadTime('Hello, world!');
+
+$readTime->get();
+```
+
+### Using `__toString()`
+
+```php
+$readTime = new Pownall\ReadTime\ReadTime('Hello, world!');
+
+echo $readTime;
+```
+
+### Using blade directive
+
+```php
+@readtime('Hello, world!')
+```
+
+### Pass in `wordsPerMinute`
+
+```php
+$readTime = new Pownall\ReadTime\ReadTime('Hello, world!', 300);
+```
+
+```php
+@readtime('Hello, world!', 300)
+```
+
+## Output
+
+It uses Carbon under the good, specifically `forHumans` on the `CarbonInterval`.
+
+The output looks like
+
+```php
+2 hours 4 minutes
 ```
 
 ## Testing

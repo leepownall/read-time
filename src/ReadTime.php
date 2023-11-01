@@ -2,37 +2,34 @@
 
 namespace Pownall\ReadTime;
 
+use Pownall\ReadTime\Parsers\ArrayParser;
 use const STR_PAD_LEFT;
 
 use Carbon\CarbonInterval;
-use Pownall\ReadTime\Exceptions\CannotParseException;
+use Pownall\ReadTime\Exceptions\CannotCountException;
 use Pownall\ReadTime\Parsers\StringParser;
 
 class ReadTime
 {
+    private int $wordCount;
+
     private int $minutes = 0;
 
     private int $hours = 0;
 
-    public function __construct(private readonly int $wordCount = 0)
+    private int $wordsPerMinute;
+
+    public function __construct(string|array $content, ?int $wordsPerMinute = null)
     {
-        $minutesToRead = round($this->wordCount / config('readtime.words_per_minute', 200));
+        $this->wordsPerMinute = $wordsPerMinute !== null
+            ? $wordsPerMinute
+            : config('readtime.words_per_minute', 200);
+
+        $this->wordCount = $this->calculateWordCount($content);
+
+        $minutesToRead = round($this->wordCount / $this->wordsPerMinute);
 
         $this->assignReadTime($minutesToRead);
-    }
-
-    public static function make(int $wordCount = 0): self
-    {
-        return new self($wordCount);
-    }
-
-    public function from(array|string $content): self
-    {
-        if (is_string($content)) {
-            return new self((new StringParser())->from($content));
-        }
-
-        throw new CannotParseException();
     }
 
     public function wordCount(): int
@@ -50,6 +47,16 @@ class ReadTime
         return $this->minutes;
     }
 
+    public function wordsPerMinute(): int
+    {
+        return $this->wordsPerMinute;
+    }
+
+    public function get(): string
+    {
+        return $this->__toString();
+    }
+
     public function __toString(): string
     {
         return CarbonInterval::create(
@@ -57,6 +64,19 @@ class ReadTime
             hours: $this->hours,
             minutes: $this->minutes
         )->forHumans();
+    }
+
+    private function calculateWordCount(array|string $content): int
+    {
+        if (is_string($content)) {
+            return (new StringParser())->from($content);
+        }
+
+        if (is_array($content)) {
+            return (new ArrayParser())->from($content);
+        }
+
+        throw new CannotCountException();
     }
 
     private function assignReadTime(int $minutesToRead): void
