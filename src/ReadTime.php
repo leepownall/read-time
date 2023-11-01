@@ -2,11 +2,11 @@
 
 namespace Pownall\ReadTime;
 
-use Pownall\ReadTime\Parsers\ArrayParser;
 use const STR_PAD_LEFT;
 
 use Carbon\CarbonInterval;
 use Pownall\ReadTime\Exceptions\CannotCountException;
+use Pownall\ReadTime\Parsers\ArrayParser;
 use Pownall\ReadTime\Parsers\StringParser;
 
 class ReadTime
@@ -19,7 +19,7 @@ class ReadTime
 
     private int $wordsPerMinute;
 
-    public function __construct(string|array $content, ?int $wordsPerMinute = null)
+    public function __construct(string|array $content, int $wordsPerMinute = null)
     {
         $this->wordsPerMinute = $wordsPerMinute !== null
             ? $wordsPerMinute

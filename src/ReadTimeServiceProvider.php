@@ -18,7 +18,7 @@ class ReadTimeServiceProvider extends PackageServiceProvider
 
     public function bootingPackage(): void
     {
-        Blade::directive('readtime', function (string|array $content, ?int $wordsPerMinute = null): string {
+        Blade::directive('readtime', function (string|array $content, int $wordsPerMinute = null): string {
             return new ReadTime($content, $wordsPerMinute);
         });
     }
