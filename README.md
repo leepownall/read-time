@@ -1,7 +1,7 @@
 # Read Time
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/pownall/read-time.svg?style=flat-square)](https://packagist.org/packages/pownall/read-time)
-[![Tests](https://img.shields.io/github/actions/workflow/status/pownall/read-time/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/pownall/read-time/actions/workflows/run-tests.yml)
+[![Tests](https://img.shields.io/github/actions/workflow/status/pownall/read-time/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/leepownall/read-time/actions/workflows/run-tests.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/pownall/read-time.svg?style=flat-square)](https://packagist.org/packages/pownall/read-time)
 
 Simple package for displaying read time.
