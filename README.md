@@ -58,6 +58,12 @@ The output looks like
 2 hours 4 minutes
 ```
 
+### Config
+
+Default `wordsPerMinute` is 200. You can override this by passing it in, or publish the config and override there.
+
+`php artisan vendor:publish --tag=readtime-config`
+
 ## Testing
 
 ```bash

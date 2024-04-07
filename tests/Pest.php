@@ -8,4 +8,3 @@ function blade(string $content)
 {
     return app('blade.compiler')->compileString($content);
 }
-

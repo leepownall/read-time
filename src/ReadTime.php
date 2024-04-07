@@ -2,11 +2,11 @@
 
 namespace Pownall\ReadTime;
 
-use Pownall\ReadTime\Parsers\ArrayParser;
 use const STR_PAD_LEFT;
 
 use Carbon\CarbonInterval;
 use Pownall\ReadTime\Exceptions\CannotCountException;
+use Pownall\ReadTime\Parsers\ArrayParser;
 use Pownall\ReadTime\Parsers\StringParser;
 
 class ReadTime
