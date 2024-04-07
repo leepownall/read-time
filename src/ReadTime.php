@@ -19,7 +19,7 @@ class ReadTime
 
     private int $wordsPerMinute;
 
-    public function __construct(string|array $content, ?int $wordsPerMinute = null)
+    public function __construct(string|array $content, int $wordsPerMinute = null)
     {
         $this->wordsPerMinute = $wordsPerMinute !== null
             ? $wordsPerMinute

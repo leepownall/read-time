@@ -1,9 +1,10 @@
 {
     "name": "pownall/read-time",
-    "description": "This is my package read-time",
+    "description": "Simple package for displaying read time",
     "keywords": [
         "leepownall",
-        "read-time"
+        "read-time",
+        "laravel"
     ],
     "homepage": "https://github.com/leepownall/read-time",
     "license": "MIT",
