@@ -50,7 +50,7 @@ $readTime = new Pownall\ReadTime\ReadTime('Hello, world!', 300);
 
 ## Output
 
-It uses Carbon under the good, specifically `forHumans` on the `CarbonInterval`.
+It uses Carbon under the hood, specifically `forHumans` on the `CarbonInterval`.
 
 The output looks like
 
